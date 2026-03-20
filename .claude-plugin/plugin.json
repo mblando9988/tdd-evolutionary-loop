@@ -1,0 +1,22 @@
+{
+  "name": "tdd-evolutionary-loop",
+  "version": "1.0.0",
+  "description": "Automate the TDD cycle with a collaborative agent team: two parallel coders and a devil's advocate, working on isolated files for rapid, safe iteration",
+  "author": {
+    "name": "michael"
+  },
+  "keywords": [
+    "tdd",
+    "test-driven-development",
+    "testing",
+    "python",
+    "evolutionary",
+    "agents",
+    "parallel",
+    "code-quality",
+    "red-green-refactor",
+    "automated-testing",
+    "code-review",
+    "pair-programming"
+  ]
+}
