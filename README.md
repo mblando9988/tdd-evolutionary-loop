@@ -1,38 +1,44 @@
 # TDD Evolutionary Loop
 
-Automate test-driven development with a collaborative agent team. Two coder agents implement features in parallel on isolated files while a devil's advocate agent reviews their work.
+A Claude Code plugin that runs test-driven development with three agents. Two
+coder agents write competing versions of the same code in separate files, and a
+reviewer agent checks both for bugs and missed edge cases. The version that
+passes the tests and the review replaces the original file.
 
-## Why Use This Plugin?
+## Steps
 
-Traditional TDD is powerful but slow. This plugin accelerates the cycle by running multiple implementation attempts in parallel and adding an adversarial review layer that catches issues tests alone miss.
+1. You describe a feature or point it at failing tests.
+2. If you gave a description, it writes the tests first and confirms they fail.
+3. Two coder agents work at the same time, each in its own copy of the file.
+4. The reviewer checks both versions.
+5. The better passing version is copied into the real file and the full test
+   suite runs again.
+6. The extra copies are deleted.
 
-## How It Works
+If neither version passes, it combines the best parts of both and tries again,
+up to 3 times.
 
-1. You describe a feature (or point to failing tests)
-2. Tests are written automatically if starting from a description
-3. Two coder agents work simultaneously on isolated variant files
-4. A devil's advocate reviews both implementations for edge cases, bugs, and code quality issues
-5. The best implementation wins and gets promoted to the main file
-6. Cleanup removes all temporary variant files
+## Use
 
-## Quick Start
+Start it with a feature:
 
-Describe a feature:
-TDD loop: add a caching layer to the user service that expires after 5 minutes
+    TDD loop: add a caching layer to the user service that expires after 5 minutes
 
-Or point to existing tests:
-TDD loop: make all the tests in tests/test_parser.py pass
+Or with tests you already have:
 
-You can also say implement this feature with TDD, red green refactor, or parallel TDD to trigger the skill.
+    TDD loop: make all the tests in tests/test_parser.py pass
 
-## Configuration
+"Implement this with TDD", "red green refactor" and "parallel TDD" start it too.
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| Number of coders | 2 | Parallel implementation agents |
-| Max iterations | 10 | Attempts per coder before giving up |
-| Max convergence | 3 | Synthesis retries when no variant passes |
+## Settings
 
-## Supported Frameworks
+| Setting | Default | Meaning |
+|---------|---------|---------|
+| Number of coders | 2 | Coder agents running at once |
+| Max iterations | 10 | Tries per coder before it stops |
+| Max convergence | 3 | Retries when neither version passes |
 
-The skill auto-detects pytest or unittest from your project configuration. Defaults to pytest if no signals are found.
+## Test frameworks
+
+Picks pytest or unittest based on the project's config. Uses pytest if it
+can't tell.
